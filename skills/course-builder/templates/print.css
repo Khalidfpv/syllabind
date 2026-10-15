@@ -1,0 +1,67 @@
+@page{size:A4;margin:13mm 13mm 15mm;
+  @bottom-left{content:"__FOOTER__";font:400 7.5pt 'Roboto Condensed',Arial,sans-serif;color:#8A9098}
+  @bottom-right{content:counter(page);font:700 8pt 'Roboto Condensed',Arial,sans-serif;color:#212121}}
+@page cover{margin:0;@bottom-left{content:none}@bottom-right{content:none}}
+:root{color-scheme:light}
+html,body{background:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-size:9.6pt;line-height:1.45}
+.topbar,.rail,.toc,.mfoot,.theme-btn,.menu-btn,.search{display:none!important}
+.shell{display:block!important;min-height:0}
+main{padding:0!important}
+.view,.view:not(.active){position:static!important;visibility:visible!important;left:auto!important;width:auto!important}
+.page{max-width:none!important;padding:0!important}
+/* cover: one full A4 page */
+.home .cover{page:cover;height:297mm;width:210mm;overflow:hidden;break-after:page}
+.cover-in{max-width:none;padding:20mm 16mm 12mm}
+.cover .kicker{margin-top:16mm}
+.cover h1{font-size:54pt}
+.cover .lede{font-size:12pt}
+.cover-hero{margin:0 0 8mm}
+.stats b{font-size:26pt}
+.contents-sheet,.overview-sheet{break-before:page;border:0!important;padding:0!important;margin:0!important;border-radius:0}
+.contents li a{padding:7px 4px;grid-template-columns:44px minmax(0,1fr) 100px 56px 50px}
+.contents .t{font-size:14pt}
+.contents .pg{font-weight:700;color:#212121}
+.overview-sheet .fig .frame{padding:4px}.overview-sheet .sub{margin-bottom:8px}
+.disclaimer{font-size:7.6pt;margin:3mm 0 0}.overview-sheet h3{margin:12px 0 4px!important}
+.overview-sheet .tracks{display:none}  /* the module map and the contents page already list every module */
+.overview-sheet .fig svg{max-height:120mm!important}
+.legend div{padding:6px 10px;font-size:8.6pt}
+/* modules */
+.view.module{break-before:page}
+.mhead{border-radius:0}
+.mhead-in{max-width:none;padding:8mm 8mm 6mm}
+.bignum{font-size:92pt;top:8mm;line-height:1}
+.prose code{background:none!important;padding:0!important;color:#4A4F57;font-weight:600}
+.mhead h1{font-size:34pt;max-width:none}
+.goals li{font-size:8.8pt;padding:6px 10px 6px 28px}.goals li::before{top:10px;left:10px}
+.prose{padding-top:4mm}
+.prose h2{font-size:18pt;margin:7mm 0 3mm;break-after:avoid}
+.prose h2::before{height:16pt}
+.prose h3{break-after:avoid}
+.prose table{font-size:8.6pt}
+.prose th,.prose td{padding:4px 8px}
+.table-wrap{break-inside:avoid}
+.fig{break-inside:avoid;margin:4mm 0 2mm}
+.fig-open{cursor:default}
+.frame{box-shadow:none!important}
+.fig img{max-height:96mm;width:auto!important;max-width:100%;margin:0 auto}
+.fig.dark .frame{width:fit-content;max-width:100%;margin:0 auto}
+.fig.tall .frame{max-width:50%}
+.fig.tall img{max-height:104mm}
+.fig svg{max-height:118mm}
+.fig figcaption{font-size:8.6pt;margin-top:2mm;break-before:avoid}
+ol.keys{font-size:8.6pt;padding:6px 10px;margin:1mm 0 4mm;break-inside:avoid;break-before:avoid}
+ol.keys li{font-size:8.6pt;padding-left:28px;margin:2px 0 4px}
+ol.keys li::before{width:21px;height:19px;font-size:11px;line-height:19px}
+.admonition{break-inside:avoid;padding:8px 12px 2px 48px;margin:3mm 0}
+.admonition::before{width:24px;height:24px;font-size:13px;line-height:24px;left:12px;top:9px}
+.admonition.facts li strong{font-size:20pt}
+.admonition.facts li{padding:8px 10px}
+.admonition.summary{break-inside:avoid;padding:12px 14px 4px 50px}
+.prose details{break-inside:avoid;margin:2mm 0}
+.prose summary{padding:6px 0}
+.prose summary::after{content:"Answer"!important}
+.srcs,.srcs + ul{break-inside:avoid}
+.admonition.summary code{color:#fff!important}
+.cover-hero svg{max-height:110mm}
