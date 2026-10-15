@@ -1,0 +1,11 @@
+{
+  "name": "course-builder",
+  "displayName": "Course Builder",
+  "version": "1.0.0",
+  "description": "Build professional offline training courses from Markdown: a searchable HTML course, a print-ready A4 PDF and Markdown notes, with annotated screenshots, diagrams, self-checks and cited sources.",
+  "author": { "name": "Khalidfpv", "url": "https://github.com/Khalidfpv" },
+  "homepage": "https://github.com/Khalidfpv/course-builder",
+  "repository": "https://github.com/Khalidfpv/course-builder",
+  "license": "MIT",
+  "keywords": ["course", "training", "documentation", "html", "pdf", "markdown", "e-learning", "skill"]
+}
