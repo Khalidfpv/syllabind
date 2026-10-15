@@ -1,0 +1,14 @@
+# sources.yaml — one source line per figure. The build refuses a figure without one (require_sources: true).
+# Key = image file name without extension. Value = a string, or {credit, url | urls, note}.
+
+defaults:                     # fallback per figure kind, used when an image has no entry below
+  dg: "Drawn for this course"
+
+images:
+  sc-demo-form:
+    credit: "Screenshot of the example page figures/demo-app.html, rendered with Playwright"
+    note: "Red numbered boxes added with scripts/annotate.py"
+  dg-pipeline:
+    credit: "Drawn for this course with scripts/svgkit.py"
+  dg-module-anatomy:
+    credit: "Drawn for this course with scripts/svgkit.py"

@@ -1,0 +1,13 @@
+# Screenshot figures for the example course — run: python <skill>/scripts/annotate.py figures/annotate.yaml
+raw_dir: raw            # relative to this file
+out_dir: ../img
+scale: 1.0              # boxes below are measured in raw pixels (1100 x 620 capture)
+figures:
+  sc-demo-form:
+    raw: demo-app.png
+    width: 1100
+    boxes:
+      - [168, 10, 238, 50, "1"]      # Settings tab
+      - [14, 110, 212, 148, "2"]      # Export section in the side list
+      - [244, 132, 618, 352, "3"]    # the three fields
+      - [246, 368, 430, 414, "4"]    # Cancel / Export buttons

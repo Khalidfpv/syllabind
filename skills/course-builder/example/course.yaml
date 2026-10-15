@@ -1,0 +1,69 @@
+# course.yaml — everything the build needs that is not lesson text. Every key is explained.
+title: "Sample Course 2026"          # HTML <title>, PDF file name, notes tag
+slug: sample-course-2026             # used for browser storage keys (progress, theme) — keep it unique per course
+date: "2026"
+
+brand:                               # top-left of the web page; leave text empty for no brand
+  text: "COURSE"
+  accent: "KIT"                      # second part, shown in the accent2 colour
+  logo: null                         # optional: path to an .svg (inlined) or .png inside this folder
+
+cover:
+  kicker: "Sample course · Edition 1.0"
+  title: "Course Kit"
+  subtitle: "How a module is built"
+  lede: >-
+    A two-module example that builds into an offline web course, an A4 PDF and Markdown notes.
+    Read it to learn the format, then replace the modules with your own.
+  hero: img/dg-pipeline.svg          # optional: an image from img/ shown on the cover
+  meta: ["Edition 1.0", "Offline HTML · A4 PDF · Markdown notes", "Every figure has a source line"]
+
+contents:
+  sub: "Two short modules and a syntax cheat sheet."
+overview:
+  sub: "Read Module 0 first; Module 1 covers figures; the appendix is the syntax reference."
+  figure: img/dg-module-anatomy.svg  # optional diagram on the overview sheet
+
+search_placeholder: "Search — e.g. figure, callout, sources"
+disclaimer: >-
+  Example content for the course template. Replace this text with your own scope, review date and disclaimer.
+
+theme:                               # optional colour overrides (light mode); add `dark:` with the same keys for dark mode
+  accent: "#D3302F"                  # headings bar, kickers, links on dark
+  accent2: "#F5A300"                 # highlights, callout numbers
+  info: "#2F5BD3"                    # links, notes
+  ok: "#12A08C"                      # tips, "complete" ticks
+
+tracks:                              # every module's `level:` must be one of these names; order = rail order
+  - name: Basics
+    color: "#4A4F57"
+    blurb: "How a module is written and built."
+  - name: Figures
+    color: "#2F5BD3"
+    blurb: "Screenshots, diagrams, callouts and sources."
+  - name: Reference
+    color: "#6B717A"
+    blurb: "Syntax cheat sheet."
+
+figure_kinds:                        # file-name prefix -> how the figure is labelled and framed
+  sc: {label: Screenshot, frame: dark, badge: SCR, legend: "Screenshot — numbered red boxes match the list under it"}
+  ph: {label: Photo, frame: dark, badge: PH, legend: "Photo — owner and source link under it"}
+  dg: {label: Diagram, frame: light, badge: SVG, color: "#2F5BD3", legend: "Diagram — drawn for this course"}
+
+stats:                               # counters on the cover and in each module header
+  - {kinds: [sc, ph], label: images}
+  - {kinds: [dg], label: diagrams}
+
+sources_file: sources.yaml
+require_sources: true                # build fails when a figure has no source line
+
+ui:                                  # optional wording overrides (defaults shown)
+  module: Module
+  appendix: Appendix
+  goals: After this module you can
+
+pdf:
+  footer: "Sample Course 2026"       # bottom-left of every PDF page
+
+notes:
+  tags: [course, lesson]             # front-matter tags of the exported Markdown notes

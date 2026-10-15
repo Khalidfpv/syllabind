@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Demo app — settings</title>
+<style>
+  body{margin:0;font:15px/1.5 system-ui,Segoe UI,Arial,sans-serif;background:#1E2024;color:#E8EAED}
+  header{display:flex;align-items:center;gap:18px;height:52px;padding:0 20px;background:#2A2D32;border-bottom:1px solid #3A3D43}
+  header b{font-size:17px}
+  nav a{color:#B7BBC2;margin-right:16px;text-decoration:none}
+  nav a.on{color:#fff;border-bottom:2px solid #F5A300;padding-bottom:14px}
+  main{display:grid;grid-template-columns:220px 1fr;min-height:520px}
+  aside{background:#25282D;padding:18px}
+  aside div{padding:8px 10px;border-radius:6px;color:#B7BBC2}
+  aside div.on{background:#3A3D43;color:#fff}
+  section{padding:26px 32px}
+  h1{font-size:22px;margin:0 0 18px}
+  label{display:block;margin:14px 0 6px;color:#B7BBC2}
+  input,select{width:340px;height:34px;border-radius:6px;border:1px solid #4A4F57;background:#17191C;color:#fff;padding:0 10px;font:inherit}
+  .row{display:flex;gap:10px;margin-top:26px}
+  button{height:36px;padding:0 18px;border-radius:6px;border:1px solid #4A4F57;background:#2A2D32;color:#fff;font:inherit}
+  button.primary{background:#D3302F;border-color:#D3302F}
+</style>
+</head>
+<body>
+<header><b>Demo app</b><nav><a href="#">Home</a><a href="#" class="on">Settings</a><a href="#">Help</a></nav></header>
+<main>
+  <aside><div>General</div><div class="on">Export</div><div>Shortcuts</div><div>About</div></aside>
+  <section>
+    <h1>Export settings</h1>
+    <label>File name</label><input value="my-video">
+    <label>Format</label><select><option>MP4 · H.264</option></select>
+    <label>Resolution</label><select><option>3840 × 2160</option></select>
+    <div class="row"><button>Cancel</button><button class="primary">Export</button></div>
+  </section>
+</main>
+</body>
+</html>
