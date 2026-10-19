@@ -1,6 +1,6 @@
 ---
 name: syllabind
-description: Create a complete training course on any topic: research the subject, write the lessons as structured Markdown modules with annotated screenshots, diagrams, self-check questions and cited sources, then build several versions from the same source — a searchable offline HTML course, a print-ready A4 PDF with a real contents page, and Markdown notes. Use when the user asks to create, write, build or update a course, training, tutorial series, handbook or step-by-step guide, to turn notes into a course, or to export a course as HTML and PDF.
+description: Create a complete training course on any topic. Research the subject, write the lessons as structured Markdown modules with annotated screenshots, diagrams, self-check questions and cited sources, then build several versions from the same source (a searchable offline HTML course, a print-ready A4 PDF with a real contents page, and Markdown notes). Use when the user asks to create, write, build or update a course, training, tutorial series, handbook or step-by-step guide, to turn notes into a course, or to export a course as HTML and PDF.
 license: MIT
 compatibility: Python 3.10+ with markdown, pyyaml, pillow, playwright (Chromium), pymupdf, pypdf. Works on Windows, macOS and Linux.
 ---
@@ -20,9 +20,16 @@ All paths below are relative to this skill's folder (in Claude Code: `${CLAUDE_S
 ## Setup (once per machine)
 
 ```bash
-pip install -r scripts/requirements.txt
+python -m pip install -r scripts/requirements.txt
 python -m playwright install chromium
 ```
+
+- Needs Python 3.10+. If `python` is not found, use `python3` (macOS, Linux) or `py` (Windows) in every command in this skill.
+- If pip refuses with "externally-managed-environment", create a virtual environment and use its Python for every command:
+  `python3 -m venv ~/.syllabind-venv`, then `~/.syllabind-venv/bin/python -m pip install -r scripts/requirements.txt`
+  (on Windows the interpreter is `%USERPROFILE%\.syllabind-venv\Scripts\python.exe`).
+- The Chromium download (about 150 MB) needs internet once. On a bare Linux server also run `python -m playwright install-deps chromium`.
+- Smoke test: `python scripts/build.py example` must print `problems 0`. Fix setup before starting a real course.
 
 ## Workflow
 

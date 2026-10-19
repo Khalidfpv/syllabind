@@ -10,12 +10,12 @@ bad or missing front matter, level not in tracks, duplicate id, unfilled templat
 `python scripts/verify_html.py <out> [--search WORD] [--shot shot.png]` opens the course in headless Chromium with
 **all network blocked** and checks: 0 external requests, 0 failed loads, 0 page errors, 0 broken images, fonts
 loaded, contents rows = modules, hash navigation, rail, pager, search (+ click), lightbox, mark complete, theme toggle,
-and no horizontal scroll at 390 px.
+and no horizontal scroll at 390 px on **every** module (a long unbreakable URL or identifier is the usual cause).
 
 ## 3. PDF — `RESULT: PASS` and a visual look
 `python scripts/check_pdf.py "<out>/<Title>.pdf" --course <course> --render <course>/build/qa 1,2,3,7,12`
-checks A4 size, objects outside the print margins, figures split by a page break, literal "MISSING" text, and that
-every module start is found. Then **open the rendered PNGs** and look for: cut-off diagrams, unreadable text on dark
+checks A4 size, objects outside the print margins, figures split by a page break, **headings stranded at the bottom of a page**
+(reported as `ORPHAN`), literal "MISSING" text, and that every module start is found. Then **open the rendered PNGs** and look for: cut-off diagrams, unreadable text on dark
 boxes, orphan headings at a page bottom, figures too small to read.
 
 ## 4. Content review
@@ -35,3 +35,6 @@ boxes, orphan headings at a page bottom, figures too small to read.
 | fonts missing in PDF | run `python -m playwright install chromium`; keep `assets/fonts/` next to the HTML |
 | text in `<details>` shows backticks | answers are raw HTML: use `<code>…</code>` |
 | playwright error on Linux | `python -m playwright install-deps chromium` |
+| "Missing Python packages" / "Chromium is not installed" | run the two commands the message prints (they use the same Python that ran the script) |
+| `ORPHAN heading` in check_pdf | add or move content so the heading and its first paragraph share a page, then re-export |
+| mobile check names a module | find the long unbreakable text in that module (URL, path, identifier) and put it in `code` or a link |

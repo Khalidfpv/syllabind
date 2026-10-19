@@ -11,6 +11,8 @@ import re
 import sys
 import zipfile
 
+import yaml
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SKILL = ROOT / "skills" / "syllabind"
 ALLOWED = {"name", "description", "license", "compatibility", "metadata", "allowed-tools"}
@@ -18,18 +20,25 @@ SKIP = {"build", "out", "__pycache__", "dist"}
 
 
 def check_frontmatter():
+    """Parse SKILL.md frontmatter with a real YAML parser (a stray ': ' in the description breaks loading) and check limits."""
     text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
     m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
     if not m:
-        sys.exit("SKILL.md: frontmatter must start on line 1")
-    keys = re.findall(r"(?m)^([A-Za-z-]+):", m.group(1))
-    bad = set(keys) - ALLOWED
+        sys.exit("SKILL.md: frontmatter must start on line 1 and end with ---")
+    try:
+        fm = yaml.safe_load(m.group(1))
+    except yaml.YAMLError as e:
+        sys.exit(f"SKILL.md: frontmatter is not valid YAML: {e}")
+    if not isinstance(fm, dict):
+        sys.exit("SKILL.md: frontmatter must be a YAML mapping")
+    bad = set(fm) - ALLOWED
     if bad:
         sys.exit(f"SKILL.md: keys not allowed outside Claude Code: {sorted(bad)}")
-    name = re.search(r"(?m)^name: (.+)$", m.group(1)).group(1).strip()
-    desc = re.search(r"(?m)^description: (.+)$", m.group(1)).group(1).strip()
-    if not re.fullmatch(r"[a-z0-9-]{1,64}", name):
+    name, desc = fm.get("name"), fm.get("description")
+    if not isinstance(name, str) or not re.fullmatch(r"[a-z0-9-]{1,64}", name):
         sys.exit("SKILL.md: name must be lowercase letters, digits and hyphens, max 64")
+    if not isinstance(desc, str) or not desc.strip():
+        sys.exit("SKILL.md: description is missing or not a string")
     if len(desc) > 1024 or "<" in desc:
         sys.exit(f"SKILL.md: description must be <= 1024 chars without XML tags (is {len(desc)})")
     return name, len(desc)

@@ -65,3 +65,5 @@ ol.keys li::before{width:21px;height:19px;font-size:11px;line-height:19px}
 .srcs,.srcs + ul{break-inside:avoid}
 .admonition.summary code{color:#fff!important}
 .cover-hero svg{max-height:110mm}
+.prose h2,.prose h3{break-after:avoid-page}
+.prose h2+*,.prose h3+*{break-before:avoid-page}

@@ -21,6 +21,7 @@ are scaled so they look the same after resizing.
 import pathlib
 import sys
 
+import _setup  # noqa: F401
 import yaml
 from PIL import Image, ImageDraw, ImageFont
 

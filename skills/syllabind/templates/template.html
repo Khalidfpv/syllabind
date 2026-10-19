@@ -122,7 +122,8 @@ main{min-width:0;padding:0 0 80px}
 .goals-label{font:700 12px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--on-panel-2);margin:0 0 8px}
 
 /* ---- prose */
-.prose{padding-top:26px}
+.prose{padding-top:26px;overflow-wrap:break-word}
+.prose a,.prose li,.prose summary,.admonition{overflow-wrap:anywhere}
 .prose h2{font:700 30px/1.05 var(--display);margin:40px 0 14px;display:flex;align-items:center;gap:12px}
 .prose h2::before{content:"";width:6px;height:26px;border-radius:3px;background:var(--accent)}
 .prose h3{font:700 22px/1.1 var(--display);margin:26px 0 8px}
@@ -287,6 +288,7 @@ dialog.lightbox p{color:#E6E8EB;font:400 14px var(--body);margin:10px 2px 0}
   function load(){ try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch(e){ return []; } }
   function save(v){ try { localStorage.setItem(KEY, JSON.stringify(v)); } catch(e){} }
   var done = load();
+  function one(n, label){ return n === 1 && /s$/.test(label) ? label.slice(0, -1) : label; }   // 1 image, 2 images
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
 
   var rail = document.getElementById("rail");
@@ -305,7 +307,7 @@ dialog.lightbox p{color:#E6E8EB;font:400 14px var(--body);margin:10px 2px 0}
     var core = mods.filter(function(m){ return m.id.charAt(0) !== DATA.appendix_prefix; });
     var mins = mods.reduce(function(a,m){ return a + m.duration; }, 0);
     document.getElementById("stats").innerHTML =
-      '<div><b>'+core.length+'</b><span>'+esc(DATA.ui.modules)+'</span></div>'+DATA.stats.map(function(s){ return '<div><b>'+s.n+'</b><span>'+esc(s.label)+'</span></div>'; }).join('')+
+      '<div><b>'+core.length+'</b><span>'+esc(one(core.length, DATA.ui.modules))+'</span></div>'+DATA.stats.map(function(s){ return '<div><b>'+s.n+'</b><span>'+esc(one(s.n, s.label))+'</span></div>'; }).join('')+
       '<div><b>'+(mins/60).toFixed(1)+' h</b><span>'+esc(DATA.ui.study_time)+'</span></div>';
     var c = "";
     mods.forEach(function(m){

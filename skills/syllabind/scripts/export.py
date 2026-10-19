@@ -18,6 +18,7 @@ import re
 import shutil
 import sys
 
+import _setup
 import yaml
 
 KIT = pathlib.Path(__file__).resolve().parent.parent
@@ -93,8 +94,8 @@ def notes_body(body, sources):
 
 def module_starts(pdf_path, kickers):
     """Find the page on which each module's kicker ("MODULE 03 · BASICS") appears."""
-    import fitz
-    doc = fitz.open(pdf_path)
+    import pymupdf
+    doc = pymupdf.open(pdf_path)
     starts = {}
     for n in range(doc.page_count):
         t = re.sub(r"\s+", "", doc[n].get_text()).upper()      # kickers are letter-spaced in the PDF text layer
@@ -107,7 +108,7 @@ def module_starts(pdf_path, kickers):
 def print_pdf(html_path, pdf_path):
     from playwright.sync_api import sync_playwright
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = _setup.launch_chromium(p)
         pg = b.new_page()
         pg.goto(html_path.resolve().as_uri(), wait_until="load")
         pg.evaluate("document.fonts.ready.then(() => true)")

@@ -12,7 +12,7 @@ import pathlib
 import sys
 import tempfile
 
-import fitz
+import pymupdf as fitz
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 from playwright.sync_api import sync_playwright

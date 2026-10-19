@@ -72,3 +72,4 @@ In <code>figures/annotate.yaml</code> (the box coordinates), then run <code>anno
 ## Sources
 
 - `scripts/annotate.py`, `scripts/svgkit.py` and `figures/make_figures.py` of this kit
+- Long web addresses are fine in the text, for example https://example.com/reference/documentation/section/subsection/page?query=a-very-long-address-with-no-spaces-at-all-that-must-wrap-on-a-phone

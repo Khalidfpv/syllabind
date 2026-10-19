@@ -20,15 +20,16 @@ for cand in (SKILL, *COURSE.parents):
 else:
     sys.exit("cannot find the skill's scripts/ folder (svgkit.py); set PYTHONPATH to <skill>/scripts")
 
-import annotate                     # noqa: E402
-from svgkit import Svg              # noqa: E402
+import _setup                      # noqa: E402,F401
+import annotate                    # noqa: E402
+from svgkit import Svg             # noqa: E402
 
 
 def screenshot():
     from playwright.sync_api import sync_playwright
     (HERE / "raw").mkdir(exist_ok=True)
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = _setup.launch_chromium(p)
         pg = b.new_page(viewport={"width": 1100, "height": 620})
         pg.goto((HERE / "demo-app.html").as_uri())
         pg.screenshot(path=str(HERE / "raw" / "demo-app.png"))

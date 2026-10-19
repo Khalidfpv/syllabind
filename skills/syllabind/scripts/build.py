@@ -14,6 +14,7 @@ import pathlib
 import re
 import sys
 
+import _setup  # noqa: F401  (friendly message when a package is missing)
 import markdown
 import yaml
 from PIL import Image
@@ -170,7 +171,7 @@ class Builder:
         num = mid[1:] if mid.startswith("M") else mid
         goals = "".join(f"<li>{esc(o)}</li>" for o in meta["objectives"])
         toc_items = "".join(f'<li><a href="#{t["id"]}">{esc(t["name"])}</a></li>' for t in m["toc"])
-        counts = "".join(f"<span>{n} {esc(lbl)}</span>" for lbl, n in m["counts"].items() if n)
+        counts = "".join(f"<span>{n} {esc(lbl[:-1] if n == 1 and lbl.endswith('s') else lbl)}</span>" for lbl, n in m["counts"].items() if n)
         return (f'<section class="view module" id="{mid}" data-level="{esc(lv)}" aria-hidden="true" style="--c:var(--t-{slug})">'
                 f'<header class="mhead"><div class="mhead-in"><div class="bignum" aria-hidden="true">{num}</div>'
                 f'<p class="kicker">{esc(self.kicker(meta))}</p><h1>{esc(meta["title"])}</h1>'

@@ -4,12 +4,13 @@ usage:  python verify_html.py <export-folder> [--search WORD] [--shot screenshot
 
 PASS only if: 0 external requests, 0 failed file loads, 0 page errors, 0 broken images, fonts loaded, every module
 section present, and hash navigation, the side rail, the pager, search, the lightbox, "mark complete", the theme
-toggle and a 390 px mobile layout (no horizontal scroll) all work.
+toggle and a 390 px mobile layout (no horizontal scroll on any module) all work.
 """
 import argparse
 import pathlib
 import sys
 
+import _setup  # noqa: F401
 from playwright.sync_api import sync_playwright
 
 ap = argparse.ArgumentParser()
@@ -34,7 +35,7 @@ def block(route):
 
 
 with sync_playwright() as p:
-    b = p.chromium.launch()
+    b = _setup.launch_chromium(p)
     pg = b.new_page(viewport={"width": 1440, "height": 900})
     pg.route("**/*", block)
     pg.on("requestfailed", lambda q: failed.append(q.url))
@@ -82,8 +83,14 @@ with sync_playwright() as p:
         pg.screenshot(path=args.shot)
     mob = b.new_page(viewport={"width": 390, "height": 844})
     mob.route("**/*", block)
-    mob.goto(f.as_uri() + "#" + first); mob.wait_for_timeout(800)
-    r["mobile_no_hscroll"] = mob.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1")
+    mob.goto(f.as_uri()); mob.wait_for_timeout(800)
+    wide = []
+    for mid in ["home"] + ids:                              # every module must fit a phone without sideways scrolling
+        mob.goto(f.as_uri() + "#" + mid); mob.wait_for_timeout(350)
+        if not mob.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1"):
+            wide.append(mid)
+    r["mobile_no_hscroll"] = not wide
+    r["mobile_wide_modules"] = wide
     b.close()
 
 for k, v in r.items():

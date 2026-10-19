@@ -71,10 +71,16 @@ Pick one:
 ### Requirements
 Python 3.10+ on Windows, macOS or Linux, plus these packages (once per machine):
 ```bash
-pip install -r skills/syllabind/scripts/requirements.txt
+python -m pip install -r skills/syllabind/scripts/requirements.txt
 python -m playwright install chromium
 ```
 With the plugin or the skill, the assistant runs these for you the first time, from the installed skill folder.
+
+Good to know:
+- **`python` not found?** Use `python3` (macOS, Linux) or `py` (Windows).
+- **pip says "externally-managed-environment"?** Use a virtual environment: `python3 -m venv .venv`, activate it, then run the two commands above.
+- **Chromium** is downloaded once (about 150 MB) and is used for the PDF and the offline test.
+- **Tested with Claude Code.** On claude.ai the skill needs an environment where Python packages and Chromium can be installed; the build scripts themselves are plain Python.
 
 ### Update or remove
 From a terminal (restart Claude Code after an update):

@@ -4,6 +4,7 @@ usage:  python check_pdf.py <file.pdf> [--course <course-dir>] [--render <out-di
 
 Every image, vector drawing and text block must lie inside the A4 page with the 13 mm print margin (2 mm tolerance),
 except on the full-bleed cover (page 1). With --course, every module kicker from build/modules.json must be found.
+A heading stranded at the bottom of a page (its content starts on the next page) is reported as ORPHAN.
 --render writes PNGs of the listed pages so you can look at them.
 """
 import argparse
@@ -12,7 +13,8 @@ import pathlib
 import re
 import sys
 
-import fitz
+import _setup  # noqa: F401
+import pymupdf as fitz
 
 ap = argparse.ArgumentParser()
 ap.add_argument("pdf")
@@ -22,7 +24,28 @@ args = ap.parse_args()
 MM = 72 / 25.4
 doc = fitz.open(args.pdf)
 w, h = doc[0].rect.width / MM, doc[0].rect.height / MM
-imgs, overflow, touching = 0, [], []
+
+def orphan_headings(page):
+    """Headings (>= 14 pt) in the bottom band of a page with no body content below them (before the footer)."""
+    H = page.rect.height
+    footer_top = H - 16 * MM
+    found = []
+    for blk in page.get_text("dict")["blocks"]:
+        for line in blk.get("lines", []):
+            size = max((sp["size"] for sp in line["spans"]), default=0)
+            text = "".join(sp["text"] for sp in line["spans"]).strip()
+            y1 = line["bbox"][3]
+            if size < 14 or not text or y1 < H - 45 * MM or y1 > footer_top:
+                continue
+            below = [b for b in page.get_text("blocks") if b[1] > y1 + 2 and b[1] < footer_top]
+            below += [i for i in page.get_image_info() if i["bbox"][1] > y1 + 2]
+            below += [d for d in page.get_drawings() if d["rect"].y0 > y1 + 2 and d["rect"].y0 < footer_top
+                      and d["rect"].width < page.rect.width * 0.95]
+            if not below:
+                found.append(text[:60])
+    return found
+
+imgs, overflow, touching, orphans = 0, [], [], []
 m, tol = 13 * MM, 2 * MM
 for n, page in enumerate(doc, 1):
     R = page.rect
@@ -31,6 +54,7 @@ for n, page in enumerate(doc, 1):
     imgs += len(infos)
     if n == 1:
         continue
+    orphans += [(n, t) for t in orphan_headings(page)]
     for info in infos:
         bb = fitz.Rect(info["bbox"])
         if not inner.contains(bb):
@@ -64,8 +88,11 @@ for o in overflow[:20]:
     print("  OVERFLOW", o)
 for o in touching[:10]:
     print("  CHECK", o)
+for o in orphans:
+    print("  ORPHAN heading at the bottom of page", o[0], "->", o[1])
+print("orphan headings:", len(orphans))
 print("literal 'MISSING' text:", text.count("MISSING"))
-ok = doc.page_count > 0 and round(w) == 210 and round(h) == 297 and not overflow and "MISSING" not in text and starts_ok
+ok = doc.page_count > 0 and round(w) == 210 and round(h) == 297 and not overflow and not orphans and "MISSING" not in text and starts_ok
 if args.render:
     out = pathlib.Path(args.render[0])
     out.mkdir(parents=True, exist_ok=True)
