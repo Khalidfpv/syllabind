@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-example:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          pip install -r skills/syllabind/scripts/requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Build the example course
+        run: python skills/syllabind/scripts/build.py skills/syllabind/example
+      - name: Export HTML, PDF and notes
+        run: python skills/syllabind/scripts/export.py skills/syllabind/example --dest out
+      - name: Verify the offline HTML
+        run: python skills/syllabind/scripts/verify_html.py out
+      - name: Check the PDF
+        run: python skills/syllabind/scripts/check_pdf.py "out/Sample Course 2026.pdf" --course skills/syllabind/example
+      - name: Package the skill zip
+        run: python tools/package_skill.py
+      - uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          name: sample-course-and-skill-zip
+          path: |
+            out/
+            dist/
