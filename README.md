@@ -32,9 +32,15 @@ Syllabind is an **Agent Skill**, packaged as a **Claude Code plugin**. The skill
 
 ## What you get
 
-![Web course: module page with an annotated screenshot](docs/images/web-module.webp)
+**The web course**: searchable, light and dark, with a figure lightbox, progress ticks and a phone layout.
 
-![PDF: cover, contents with page numbers, module pages](docs/images/pdf-pages.webp)
+![The offline web course in a desktop window (light theme) and on a phone (dark theme)](docs/images/showcase-web.webp)
+
+**The A4 PDF**: a full-bleed cover, a contents page with real page numbers, and one chapter per module.
+
+![Pages of the A4 PDF: cover, a module page with an annotated screenshot, and a diagram page](docs/images/showcase-pdf.webp)
+
+*Both images are real renders of the [sample course](skills/syllabind/example/), made by [`tools/make_readme_images.py`](tools/make_readme_images.py).*
 
 | Output | Features |
 |---|---|
