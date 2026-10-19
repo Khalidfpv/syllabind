@@ -10,11 +10,12 @@
 
 # Syllabind
 
-*Syllabus + bind: binds your Markdown lessons into one finished, checked course.*
+*Syllabus + bind: give it a topic, get a finished, checked course.*
 
-**Write a course once in Markdown, then ship it three ways:** a searchable offline web course, a print-ready A4 PDF
-with a real contents page, and Markdown notes. Every course gets annotated screenshots, diagrams, self-check questions
-and a cited source under every figure.
+**Give it a topic, get a complete course.** The assistant researches the subject and writes the lessons as Markdown
+modules, with annotated screenshots, diagrams, self-check questions and a cited source under every figure. Syllabind then
+builds the same lessons into several versions: a searchable offline web course, a print-ready A4 PDF with a real
+contents page, and Markdown notes. You can also bring your own notes and turn them into a course.
 
 Syllabind is an **Agent Skill**, packaged as a **Claude Code plugin**. The skill teaches the assistant the whole method
 (scope, research, figures, writing rules, verification) and the bundled scripts do the building and the checking.
@@ -31,6 +32,8 @@ Syllabind is an **Agent Skill**, packaged as a **Claude Code plugin**. The skill
 - [Contributing and licence](#contributing-and-licence)
 
 ## What you get
+
+One set of Markdown lessons, built into three finished versions:
 
 **The web course**: searchable, light and dark, with a figure lightbox, progress ticks and a phone layout.
 
@@ -86,7 +89,7 @@ claude plugin uninstall syllabind@syllabind
 ### With the assistant
 Just ask. The skill loads automatically, or call it directly with `/syllabind:syllabind`.
 
-> *"Build a 6-module beginner course about our onboarding process, with annotated screenshots and a PDF."*
+> *"Create a 6-module beginner course on version control, with annotated screenshots and a PDF."*
 >
 > *"Add a module on keyboard shortcuts to the course in `./my-course`, then rebuild and check it."*
 >
@@ -96,7 +99,7 @@ The assistant follows the workflow in [`SKILL.md`](skills/syllabind/SKILL.md): s
 build → export → verify, and reports which checks passed.
 
 ### Without the assistant
-From the repository root (the new course is created next to the repository, not inside it):
+You write the modules yourself; the scripts build and check them. From the repository root (the new course is created next to the repository, not inside it):
 ```bash
 python skills/syllabind/scripts/new_course.py ../my-course --title "My Course 2026" --with-example-content
 python skills/syllabind/scripts/build.py ../my-course
@@ -110,6 +113,7 @@ Open `../my-course/out/My Course 2026.html`. Leave out `--with-example-content` 
 
 ```mermaid
 flowchart LR
+    T[Your topic<br/>or your notes] -- research + write --> M
     subgraph Source["Course folder"]
         Y[course.yaml<br/>title · tracks · theme]
         M[modules/*.md<br/>one file per module]

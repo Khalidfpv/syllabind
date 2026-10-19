@@ -1,13 +1,13 @@
 ---
 name: syllabind
-description: Build a professional, offline training course from Markdown lessons — one source producing a searchable offline HTML course (light/dark, progress tracking, lightbox), a print-ready A4 PDF with a real contents page, and Markdown notes. Use when the user asks to create, write, build or update a course, training, tutorial series, handbook or step-by-step guide with screenshots, diagrams, numbered callouts, self-check questions and cited sources, or wants an existing course exported as HTML and PDF.
+description: Create a complete training course on any topic: research the subject, write the lessons as structured Markdown modules with annotated screenshots, diagrams, self-check questions and cited sources, then build several versions from the same source — a searchable offline HTML course, a print-ready A4 PDF with a real contents page, and Markdown notes. Use when the user asks to create, write, build or update a course, training, tutorial series, handbook or step-by-step guide, to turn notes into a course, or to export a course as HTML and PDF.
 license: MIT
 compatibility: Python 3.10+ with markdown, pyyaml, pillow, playwright (Chromium), pymupdf, pypdf. Works on Windows, macOS and Linux.
 ---
 
 # Syllabind
 
-Turns a folder of Markdown modules plus one `course.yaml` into three outputs from the same source:
+Give it a topic and it produces a complete course. The assistant researches the subject and writes the lessons as Markdown modules (workflow steps 3–5); the scripts then build and check them. One folder of Markdown modules plus one `course.yaml` becomes three outputs from the same source:
 
 | Output | What the learner gets |
 |---|---|
