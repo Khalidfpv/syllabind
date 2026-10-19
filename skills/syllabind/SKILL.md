@@ -1,11 +1,11 @@
 ---
-name: course-builder
+name: syllabind
 description: Build a professional, offline training course from Markdown lessons — one source producing a searchable offline HTML course (light/dark, progress tracking, lightbox), a print-ready A4 PDF with a real contents page, and Markdown notes. Use when the user asks to create, write, build or update a course, training, tutorial series, handbook or step-by-step guide with screenshots, diagrams, numbered callouts, self-check questions and cited sources, or wants an existing course exported as HTML and PDF.
 license: MIT
 compatibility: Python 3.10+ with markdown, pyyaml, pillow, playwright (Chromium), pymupdf, pypdf. Works on Windows, macOS and Linux.
 ---
 
-# Course Builder
+# Syllabind
 
 Turns a folder of Markdown modules plus one `course.yaml` into three outputs from the same source:
 

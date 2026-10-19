@@ -4,7 +4,7 @@ All notable changes are listed here. Versions follow [Semantic Versioning](https
 
 ## [1.0.0] — 2026-10-19
 ### Added
-- `course-builder` skill: workflow, writing rules, figure rules, config and verification references.
+- `syllabind` skill: workflow, writing rules, figure rules, config and verification references.
 - Scripts: `new_course.py`, `build.py`, `export.py` (offline HTML, two-pass A4 PDF via Chromium, Markdown notes),
   `annotate.py` (numbered screenshot callouts), `svgkit.py` (diagrams), `verify_html.py`, `check_pdf.py`.
 - Web template (light / dark, search, lightbox, progress, mobile) and print stylesheet.

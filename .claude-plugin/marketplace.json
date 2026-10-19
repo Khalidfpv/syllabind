@@ -1,10 +1,10 @@
 {
-  "name": "course-builder",
+  "name": "syllabind",
   "owner": { "name": "Khalidfpv", "url": "https://github.com/Khalidfpv" },
-  "description": "Course Builder — Markdown to offline HTML course, A4 PDF and notes.",
+  "description": "Syllabind — Markdown to offline HTML course, A4 PDF and notes.",
   "plugins": [
     {
-      "name": "course-builder",
+      "name": "syllabind",
       "source": "./",
       "description": "Build professional offline training courses from Markdown (HTML + PDF + notes).",
       "category": "productivity",

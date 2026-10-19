@@ -1,14 +1,16 @@
-<p align="center"><img src="docs/images/banner.webp" alt="Course Builder — Markdown to offline HTML course, A4 PDF and notes" width="100%"></p>
+<p align="center"><img src="docs/images/banner.webp" alt="Syllabind: Markdown to offline HTML course, A4 PDF and notes" width="100%"></p>
 
 <p align="center">
-  <a href="https://github.com/Khalidfpv/course-builder/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Khalidfpv/course-builder/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://github.com/Khalidfpv/course-builder/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/Khalidfpv/course-builder"></a>
+  <a href="https://github.com/Khalidfpv/syllabind/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Khalidfpv/syllabind/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/Khalidfpv/syllabind/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/Khalidfpv/syllabind"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB">
   <img alt="Platforms" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-555">
 </p>
 
-# Course Builder
+# Syllabind
+
+*Syllabus + bind: binds your Markdown lessons into one finished, checked course.*
 
 **Write a course once in Markdown, then ship it three ways:** a searchable offline web course, a print-ready A4 PDF with a
 real contents page, and Markdown notes. Includes annotated screenshots, diagrams, self-check questions and a cited
@@ -35,19 +37,19 @@ scope, research, figures, writing rules and verification. The scripts do the bui
 ### As a plugin (recommended, keeps you updated)
 In Claude Code:
 ```
-/plugin marketplace add Khalidfpv/course-builder
-/plugin install course-builder@course-builder
+/plugin marketplace add Khalidfpv/syllabind
+/plugin install syllabind@syllabind
 ```
-Then ask: *"Build a course about … with screenshots"*, or invoke `/course-builder:course-builder`.
+Then ask: *"Build a course about … with screenshots"*, or invoke `/syllabind:syllabind`.
 
 ### As a standalone skill
-- **Claude Code:** copy `skills/course-builder/` to `~/.claude/skills/course-builder/`.
-- **claude.ai:** download `course-builder-<version>.zip` from the [Releases](https://github.com/Khalidfpv/course-builder/releases)
+- **Claude Code:** copy `skills/syllabind/` to `~/.claude/skills/syllabind/`.
+- **claude.ai:** download `syllabind-<version>.zip` from the [Releases](https://github.com/Khalidfpv/syllabind/releases)
   page (or run `python tools/package_skill.py`), then upload it in **Settings › Capabilities › Skills**.
 
 ### Python dependencies (once per machine)
 ```bash
-pip install -r skills/course-builder/scripts/requirements.txt
+pip install -r skills/syllabind/scripts/requirements.txt
 python -m playwright install chromium
 ```
 Python 3.10+, on Windows, macOS or Linux.
@@ -55,7 +57,7 @@ Python 3.10+, on Windows, macOS or Linux.
 ## Quick start (without the assistant)
 
 ```bash
-cd skills/course-builder
+cd skills/syllabind
 python scripts/new_course.py ../../my-course --title "My Course 2026" --with-example-content
 python scripts/build.py ../../my-course
 python scripts/export.py ../../my-course --dest ../../my-course/out
@@ -91,12 +93,12 @@ flowchart LR
 | Path | What it is |
 |---|---|
 | [`.claude-plugin/`](.claude-plugin/) | plugin manifest (`plugin.json`) and marketplace catalogue (`marketplace.json`) |
-| [`skills/course-builder/SKILL.md`](skills/course-builder/SKILL.md) | the skill: workflow, rules, file map |
-| [`skills/course-builder/reference/`](skills/course-builder/reference/) | authoring, figures, config and verification rules |
-| [`skills/course-builder/scripts/`](skills/course-builder/scripts/) | build, export, annotate, diagrams, checks |
-| [`skills/course-builder/templates/`](skills/course-builder/templates/) | web page design and print stylesheet |
-| [`skills/course-builder/example/`](skills/course-builder/example/) | complete sample course (2 modules + appendix) |
-| [`skills/course-builder/assets/fonts/`](skills/course-builder/assets/fonts/) | bundled fonts (SIL OFL 1.1) |
+| [`skills/syllabind/SKILL.md`](skills/syllabind/SKILL.md) | the skill: workflow, rules, file map |
+| [`skills/syllabind/reference/`](skills/syllabind/reference/) | authoring, figures, config and verification rules |
+| [`skills/syllabind/scripts/`](skills/syllabind/scripts/) | build, export, annotate, diagrams, checks |
+| [`skills/syllabind/templates/`](skills/syllabind/templates/) | web page design and print stylesheet |
+| [`skills/syllabind/example/`](skills/syllabind/example/) | complete sample course (2 modules + appendix) |
+| [`skills/syllabind/assets/fonts/`](skills/syllabind/assets/fonts/) | bundled fonts (SIL OFL 1.1) |
 | [`tools/`](tools/) | maintainer tools (skill zip packaging) |
 | [`docs/`](docs/) | documentation index and images |
 | [`.github/`](.github/) | CI (builds, exports and checks the example on Windows, macOS and Linux), issue and PR templates |
@@ -105,10 +107,10 @@ flowchart LR
 
 Run the same checks the CI runs, from the repository root:
 ```bash
-python skills/course-builder/scripts/build.py skills/course-builder/example
-python skills/course-builder/scripts/export.py skills/course-builder/example --dest out
-python skills/course-builder/scripts/verify_html.py out
-python skills/course-builder/scripts/check_pdf.py "out/Sample Course 2026.pdf" --course skills/course-builder/example
+python skills/syllabind/scripts/build.py skills/syllabind/example
+python skills/syllabind/scripts/export.py skills/syllabind/example --dest out
+python skills/syllabind/scripts/verify_html.py out
+python skills/syllabind/scripts/check_pdf.py "out/Sample Course 2026.pdf" --course skills/syllabind/example
 claude plugin validate . --strict
 ```
 All of them must print `PASS` (or `Validation passed`).
@@ -121,4 +123,4 @@ documents the format itself.
 ## Contributing and licence
 
 Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md) and the [security policy](SECURITY.md). Code is under the [MIT licence](LICENSE).
-The bundled fonts are under the [SIL Open Font License 1.1](skills/course-builder/assets/fonts/OFL.txt).
+The bundled fonts are under the [SIL Open Font License 1.1](skills/syllabind/assets/fonts/OFL.txt).

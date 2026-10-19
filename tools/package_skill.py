@@ -1,8 +1,8 @@
 """Package the skill folder as a zip for claude.ai (Settings › Capabilities › Skills › Upload) or for manual install.
 
-usage:  python tools/package_skill.py            -> dist/course-builder-<version>.zip
+usage:  python tools/package_skill.py            -> dist/syllabind-<version>.zip
 
-The zip holds one top-level folder `course-builder/` with SKILL.md inside, without generated files
+The zip holds one top-level folder `syllabind/` with SKILL.md inside, without generated files
 (build/, out/, __pycache__). It fails if SKILL.md frontmatter uses keys that claude.ai rejects or exceeds its limits.
 """
 import json
@@ -12,7 +12,7 @@ import sys
 import zipfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SKILL = ROOT / "skills" / "course-builder"
+SKILL = ROOT / "skills" / "syllabind"
 ALLOWED = {"name", "description", "license", "compatibility", "metadata", "allowed-tools"}
 SKIP = {"build", "out", "__pycache__", "dist"}
 

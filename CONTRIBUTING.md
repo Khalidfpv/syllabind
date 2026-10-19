@@ -4,17 +4,17 @@ Thanks for helping. Keep changes small, tested and documented.
 
 ## Set up
 ```bash
-pip install -r skills/course-builder/scripts/requirements.txt
+pip install -r skills/syllabind/scripts/requirements.txt
 python -m playwright install chromium
 ```
 
 ## Before you open a pull request
 1. Build, export and check the example. Every command must pass:
    ```bash
-   python skills/course-builder/scripts/build.py skills/course-builder/example
-   python skills/course-builder/scripts/export.py skills/course-builder/example --dest out
-   python skills/course-builder/scripts/verify_html.py out
-   python skills/course-builder/scripts/check_pdf.py "out/Sample Course 2026.pdf" --course skills/course-builder/example
+   python skills/syllabind/scripts/build.py skills/syllabind/example
+   python skills/syllabind/scripts/export.py skills/syllabind/example --dest out
+   python skills/syllabind/scripts/verify_html.py out
+   python skills/syllabind/scripts/check_pdf.py "out/Sample Course 2026.pdf" --course skills/syllabind/example
    claude plugin validate . --strict
    ```
 2. If you change the look, open the HTML and the rendered PDF pages, and attach before/after screenshots to the PR.
@@ -31,5 +31,5 @@ python -m playwright install chromium
 
 ## Releasing
 1. Update `CHANGELOG.md` and bump the version in `.claude-plugin/plugin.json`.
-2. `python tools/package_skill.py` creates `dist/course-builder-<version>.zip`.
+2. `python tools/package_skill.py` creates `dist/syllabind-<version>.zip`.
 3. Tag `v<version>` and attach the zip to a GitHub release.

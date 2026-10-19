@@ -1,6 +1,6 @@
 # Sample course
 
-A complete course in the Course Builder format: two modules and a syntax appendix. It documents the format itself.
+A complete course in the Syllabind format: two modules and a syntax appendix. It documents the format itself.
 
 ```bash
 python figures/make_figures.py            # optional: regenerate the screenshot and diagrams (needs Playwright)

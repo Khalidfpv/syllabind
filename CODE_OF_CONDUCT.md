@@ -6,4 +6,4 @@ In short: be respectful, assume good intent, give constructive feedback, and kee
 Harassment of any kind is not tolerated.
 
 Report unacceptable behaviour by opening a private
-[security advisory](https://github.com/Khalidfpv/course-builder/security/advisories/new) on this repository.
+[security advisory](https://github.com/Khalidfpv/syllabind/security/advisories/new) on this repository.
