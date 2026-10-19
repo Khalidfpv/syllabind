@@ -2,6 +2,10 @@
 
 All notable changes are listed here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [1.0.3] — 2026-10-19
+### Changed
+- The setup smoke test now runs in a temporary copy, so nothing is written into the installed skill folder.
+
 ## [1.0.2] — 2026-10-19
 ### Fixed
 - `SKILL.md` frontmatter was invalid YAML in 1.0.1 (a `: ` inside the description), which could stop the skill from loading. Use 1.0.2 or later.
@@ -30,6 +34,7 @@ All notable changes are listed here. Versions follow [Semantic Versioning](https
 - Plugin and marketplace manifests, CI on Windows, macOS and Linux, and a skill-zip packaging tool.
 - Repository banner, issue and pull request templates, code of conduct and security policy.
 
+[1.0.3]: https://github.com/Khalidfpv/syllabind/releases/tag/v1.0.3
 [1.0.2]: https://github.com/Khalidfpv/syllabind/releases/tag/v1.0.2
 [1.0.1]: https://github.com/Khalidfpv/syllabind/releases/tag/v1.0.1
 [1.0.0]: https://github.com/Khalidfpv/syllabind/releases/tag/v1.0.0

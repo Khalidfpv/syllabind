@@ -1,7 +1,7 @@
 {
   "name": "syllabind",
   "displayName": "Syllabind",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Give it a topic and get a complete course: lessons written as Markdown, built into a searchable offline HTML course, a print-ready A4 PDF and notes, with annotated screenshots, diagrams, self-checks and cited sources.",
   "author": { "name": "Khalidfpv", "url": "https://github.com/Khalidfpv" },
   "homepage": "https://github.com/Khalidfpv/syllabind",

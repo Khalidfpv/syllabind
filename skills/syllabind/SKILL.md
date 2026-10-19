@@ -29,7 +29,7 @@ python -m playwright install chromium
   `python3 -m venv ~/.syllabind-venv`, then `~/.syllabind-venv/bin/python -m pip install -r scripts/requirements.txt`
   (on Windows the interpreter is `%USERPROFILE%\.syllabind-venv\Scripts\python.exe`).
 - The Chromium download (about 150 MB) needs internet once. On a bare Linux server also run `python -m playwright install-deps chromium`.
-- Smoke test: `python scripts/build.py example` must print `problems 0`. Fix setup before starting a real course.
+- Smoke test (writes nothing into the skill folder): `python scripts/new_course.py <temp-dir>/smoke --title Smoke --with-example-content`, then `python scripts/build.py <temp-dir>/smoke` must print `problems 0`. Fix setup before starting a real course.
 
 ## Workflow
 
