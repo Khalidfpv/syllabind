@@ -1,3 +1,13 @@
+<p align="center"><img src="docs/images/banner.webp" alt="Course Builder — Markdown to offline HTML course, A4 PDF and notes" width="100%"></p>
+
+<p align="center">
+  <a href="https://github.com/Khalidfpv/course-builder/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Khalidfpv/course-builder/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/Khalidfpv/course-builder/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/Khalidfpv/course-builder"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+  <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB">
+  <img alt="Platforms" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-555">
+</p>
+
 # Course Builder
 
 **Write a course once in Markdown, then ship it three ways:** a searchable offline web course, a print-ready A4 PDF with a
@@ -89,7 +99,7 @@ flowchart LR
 | [`skills/course-builder/assets/fonts/`](skills/course-builder/assets/fonts/) | bundled fonts (SIL OFL 1.1) |
 | [`tools/`](tools/) | maintainer tools (skill zip packaging) |
 | [`docs/`](docs/) | documentation index and images |
-| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | builds, exports and checks the example on Windows, macOS and Linux |
+| [`.github/`](.github/) | CI (builds, exports and checks the example on Windows, macOS and Linux), issue and PR templates |
 
 ## How to test
 
@@ -110,5 +120,5 @@ documents the format itself.
 
 ## Contributing and licence
 
-Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md). Code is under the [MIT licence](LICENSE).
+Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md) and the [security policy](SECURITY.md). Code is under the [MIT licence](LICENSE).
 The bundled fonts are under the [SIL Open Font License 1.1](skills/course-builder/assets/fonts/OFL.txt).

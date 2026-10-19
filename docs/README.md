@@ -12,4 +12,4 @@
 | [CONTRIBUTING](../CONTRIBUTING.md) | development setup, checks, releasing |
 | [CHANGELOG](../CHANGELOG.md) | release history |
 
-`images/` holds the screenshots used in the README.
+`images/` holds the README images: `banner.webp`, `social-preview.png` (GitHub social preview, 1280 × 640) and screenshots of the sample course.
