@@ -11,3 +11,5 @@ All notable changes are listed here. Versions follow [Semantic Versioning](https
 - Sample course (two modules and a syntax appendix) that documents the format.
 - Plugin and marketplace manifests, CI on Windows, macOS and Linux, and a skill-zip packaging tool.
 - Repository banner, issue and pull request templates, code of conduct and security policy.
+
+[1.0.0]: https://github.com/Khalidfpv/syllabind/releases/tag/v1.0.0

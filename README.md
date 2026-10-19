@@ -52,19 +52,28 @@ Then ask: *"Build a course about … with screenshots"*, or invoke `/syllabind:s
 pip install -r skills/syllabind/scripts/requirements.txt
 python -m playwright install chromium
 ```
-Python 3.10+, on Windows, macOS or Linux.
+Python 3.10+, on Windows, macOS or Linux. When you use the plugin, the assistant runs these two commands for you
+the first time (from the installed skill folder).
+
+### Update or remove
+From a terminal (restart Claude Code after an update):
+```bash
+claude plugin marketplace update syllabind
+claude plugin update syllabind@syllabind
+claude plugin uninstall syllabind@syllabind
+```
 
 ## Quick start (without the assistant)
 
+From the repository root (the new course is created next to the repository, not inside it):
 ```bash
-cd skills/syllabind
-python scripts/new_course.py ../../my-course --title "My Course 2026" --with-example-content
-python scripts/build.py ../../my-course
-python scripts/export.py ../../my-course --dest ../../my-course/out
-python scripts/verify_html.py ../../my-course/out
-python scripts/check_pdf.py "../../my-course/out/My Course 2026.pdf" --course ../../my-course
+python skills/syllabind/scripts/new_course.py ../my-course --title "My Course 2026" --with-example-content
+python skills/syllabind/scripts/build.py ../my-course
+python skills/syllabind/scripts/export.py ../my-course --dest ../my-course/out
+python skills/syllabind/scripts/verify_html.py ../my-course/out
+python skills/syllabind/scripts/check_pdf.py "../my-course/out/My Course 2026.pdf" --course ../my-course
 ```
-Open `my-course/out/My Course 2026.html`.
+Open `../my-course/out/My Course 2026.html`. Leave out `--with-example-content` to start from two empty modules.
 
 ## How it works
 
