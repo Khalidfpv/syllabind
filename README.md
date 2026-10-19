@@ -12,48 +12,60 @@
 
 *Syllabus + bind: binds your Markdown lessons into one finished, checked course.*
 
-**Write a course once in Markdown, then ship it three ways:** a searchable offline web course, a print-ready A4 PDF with a
-real contents page, and Markdown notes. Includes annotated screenshots, diagrams, self-check questions and a cited
-source under every figure.
+**Write a course once in Markdown, then ship it three ways:** a searchable offline web course, a print-ready A4 PDF
+with a real contents page, and Markdown notes. Every course gets annotated screenshots, diagrams, self-check questions
+and a cited source under every figure.
 
-It ships as an **Agent Skill**, inside a **Claude Code plugin**. The skill teaches the assistant the whole method:
-scope, research, figures, writing rules and verification. The scripts do the building and checking.
+Syllabind is an **Agent Skill**, packaged as a **Claude Code plugin**. The skill teaches the assistant the whole method
+(scope, research, figures, writing rules, verification) and the bundled scripts do the building and the checking.
+
+## Contents
+
+- [What you get](#what-you-get)
+- [Install](#install)
+- [Use it](#use-it)
+- [How it works](#how-it-works)
+- [Repository map](#repository-map)
+- [Test it](#test-it)
+- [Documentation](#documentation)
+- [Contributing and licence](#contributing-and-licence)
+
+## What you get
 
 ![Web course: module page with an annotated screenshot](docs/images/web-module.webp)
 
 ![PDF: cover, contents with page numbers, module pages](docs/images/pdf-pages.webp)
 
-## What you get
-
 | Output | Features |
 |---|---|
-| **Offline HTML** | cover, contents, side rail, search, figure lightbox, light / dark, "mark complete" progress, mobile layout, zero network requests |
-| **A4 PDF** | full-bleed cover, contents page with page numbers (two-pass print), one module per chapter, page footer |
-| **Markdown notes** | one note per module with callouts and figure source lines (Obsidian-friendly) |
+| **Offline HTML** | cover, contents, side rail, search, figure lightbox, light / dark theme, "mark complete" progress, mobile layout, zero network requests |
+| **A4 PDF** | full-bleed cover, contents page with real page numbers (two-pass print), one module per chapter, page footer |
+| **Markdown notes** | one note per module, with callouts and figure source lines (Obsidian-friendly) |
 | **Checks** | build validation, an offline HTML test in headless Chromium, and a PDF layout / overflow test |
 
 ## Install
 
-### As a plugin (recommended, keeps you updated)
-In Claude Code:
+Pick one:
+
+| Where you work | How to install |
+|---|---|
+| **Claude Code** (recommended, gets updates) | the plugin, see below |
+| **claude.ai** | download `syllabind-<version>.zip` from [Releases](https://github.com/Khalidfpv/syllabind/releases/latest), then upload it in **Settings › Capabilities › Skills** |
+| **Claude Code, no plugin** | copy `skills/syllabind/` to `~/.claude/skills/syllabind/` |
+
+### Claude Code plugin
 ```
 /plugin marketplace add Khalidfpv/syllabind
 /plugin install syllabind@syllabind
 ```
-Then ask: *"Build a course about … with screenshots"*, or invoke `/syllabind:syllabind`.
 
-### As a standalone skill
-- **Claude Code:** copy `skills/syllabind/` to `~/.claude/skills/syllabind/`.
-- **claude.ai:** download `syllabind-<version>.zip` from the [Releases](https://github.com/Khalidfpv/syllabind/releases)
-  page (or run `python tools/package_skill.py`), then upload it in **Settings › Capabilities › Skills**.
-
-### Python dependencies (once per machine)
+### Requirements
+Python 3.10+ on Windows, macOS or Linux, plus these packages (once per machine):
 ```bash
 pip install -r skills/syllabind/scripts/requirements.txt
 python -m playwright install chromium
 ```
-Python 3.10+, on Windows, macOS or Linux. When you use the plugin, the assistant runs these two commands for you
-the first time (from the installed skill folder).
+With the plugin or the skill, the assistant runs these for you the first time, from the installed skill folder.
 
 ### Update or remove
 From a terminal (restart Claude Code after an update):
@@ -63,8 +75,21 @@ claude plugin update syllabind@syllabind
 claude plugin uninstall syllabind@syllabind
 ```
 
-## Quick start (without the assistant)
+## Use it
 
+### With the assistant
+Just ask. The skill loads automatically, or call it directly with `/syllabind:syllabind`.
+
+> *"Build a 6-module beginner course about our onboarding process, with annotated screenshots and a PDF."*
+>
+> *"Add a module on keyboard shortcuts to the course in `./my-course`, then rebuild and check it."*
+>
+> *"Turn these notes into a course and export it as HTML and PDF."*
+
+The assistant follows the workflow in [`SKILL.md`](skills/syllabind/SKILL.md): scope → sources → figures → modules →
+build → export → verify, and reports which checks passed.
+
+### Without the assistant
 From the repository root (the new course is created next to the repository, not inside it):
 ```bash
 python skills/syllabind/scripts/new_course.py ../my-course --title "My Course 2026" --with-example-content
@@ -97,24 +122,36 @@ flowchart LR
     O2 --> T2[check_pdf.py]
 ```
 
+A course is one folder:
+
+```
+my-course/
+├─ course.yaml      title, cover, tracks, theme, figure kinds
+├─ sources.yaml     one source line per figure
+├─ modules/         M00-….md … A1-….md
+├─ figures/         raw captures, annotate.yaml, diagram scripts
+├─ img/             generated figures used by the modules
+└─ build/           generated, never edit
+```
+
 ## Repository map
 
 | Path | What it is |
 |---|---|
-| [`.claude-plugin/`](.claude-plugin/) | plugin manifest (`plugin.json`) and marketplace catalogue (`marketplace.json`) |
 | [`skills/syllabind/SKILL.md`](skills/syllabind/SKILL.md) | the skill: workflow, rules, file map |
 | [`skills/syllabind/reference/`](skills/syllabind/reference/) | authoring, figures, config and verification rules |
 | [`skills/syllabind/scripts/`](skills/syllabind/scripts/) | build, export, annotate, diagrams, checks |
 | [`skills/syllabind/templates/`](skills/syllabind/templates/) | web page design and print stylesheet |
-| [`skills/syllabind/example/`](skills/syllabind/example/) | complete sample course (2 modules + appendix) |
+| [`skills/syllabind/example/`](skills/syllabind/example/) | complete sample course (2 modules + appendix) that documents the format |
 | [`skills/syllabind/assets/fonts/`](skills/syllabind/assets/fonts/) | bundled fonts (SIL OFL 1.1) |
-| [`tools/`](tools/) | maintainer tools (skill zip packaging) |
-| [`docs/`](docs/) | documentation index and images |
-| [`.github/`](.github/) | CI (builds, exports and checks the example on Windows, macOS and Linux), issue and PR templates |
+| [`.claude-plugin/`](.claude-plugin/) | plugin manifest (`plugin.json`) and marketplace catalogue (`marketplace.json`) |
+| [`.github/`](.github/) | `workflows/ci.yml` (build, export and check the sample course on Windows, macOS and Linux), issue forms, PR checklist |
+| [`tools/`](tools/) | maintainer tools: `package_skill.py` builds the release zip |
+| [`docs/`](docs/) | documentation index and README images |
 
-## How to test
+## Test it
 
-Run the same checks the CI runs, from the repository root:
+The same checks the CI runs, from the repository root:
 ```bash
 python skills/syllabind/scripts/build.py skills/syllabind/example
 python skills/syllabind/scripts/export.py skills/syllabind/example --dest out
@@ -122,14 +159,24 @@ python skills/syllabind/scripts/verify_html.py out
 python skills/syllabind/scripts/check_pdf.py "out/Sample Course 2026.pdf" --course skills/syllabind/example
 claude plugin validate . --strict
 ```
-All of them must print `PASS` (or `Validation passed`).
+Each must end with `RESULT: PASS` or `Validation passed`. Generated folders (`out/`, `build/`, `dist/`) are git-ignored.
 
 ## Documentation
 
-See [`docs/README.md`](docs/README.md) for the full documentation map. Start with the sample course, which
-documents the format itself.
+| Read | For |
+|---|---|
+| [SKILL.md](skills/syllabind/SKILL.md) | the full workflow, step by step |
+| [Authoring rules](skills/syllabind/reference/authoring.md) | module skeleton, writing style, boxes, evidence |
+| [Figures](skills/syllabind/reference/figures.md) | screenshots, numbered callouts, diagrams, sources |
+| [course.yaml reference](skills/syllabind/reference/config.md) | every config key |
+| [Verification](skills/syllabind/reference/verification.md) | the checks and troubleshooting |
+| [CHANGELOG](CHANGELOG.md) | release history |
+
+The full map is in [`docs/README.md`](docs/README.md).
 
 ## Contributing and licence
 
-Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md) and the [security policy](SECURITY.md). Code is under the [MIT licence](LICENSE).
-The bundled fonts are under the [SIL Open Font License 1.1](skills/syllabind/assets/fonts/OFL.txt).
+Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md) and the
+[security policy](SECURITY.md).
+
+Code: [MIT licence](LICENSE). Bundled fonts: [SIL Open Font License 1.1](skills/syllabind/assets/fonts/OFL.txt).
